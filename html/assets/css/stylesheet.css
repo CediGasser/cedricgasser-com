@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+
+
 :root{
     /*design base: https://hihayk.github.io/shaper/#Nunito,%20sans-serif/1.4/1/2.98/0.8/2/0.5/314/100/46/5/0.5/2/false  */
 
@@ -16,8 +19,7 @@
     --lineHeightRelativeAmount: 1.1em;
     --globalLineHeight: calc(var(--lineHeightFixedAmount) + var(--lineHeightRelativeAmount));
 
-    --fontFamily: Nunito, Roboto, system-ui, sans-serif;
-
+    --fontFamily: 'Nunito', Roboto, system-ui, sans-serif;
 
     /* Spacing */
     --unit: 0.5rem;
@@ -68,13 +70,13 @@
     --c-grey7: hsl(var(--greyH), var(--greyS), var(--grey7L));
     --c-grey8: hsl(var(--greyH), var(--greyS), var(--grey8L));
 
-    --c-border: hsla(var(--greyH), var(--greyS), var(--grey8L), 0.1);
-    --c-overlay: hsla(var(--greyH), var(--greyS), var(--grey8L), 0.07);
-    --c-background: white;
-    --c-body: var(--c-grey8);
-    --c-bodyDimmed: hsla(var(--greyH), var(--greyS), var(--grey8L), 0.5);
-    --c-fieldBorder: var(--c-grey2);
-    --c-buttonBg: var(--c-grey2);
+    --c-border: hsla(var(--greyH), var(--greyS), var(--grey1L), 0.1);
+    --c-overlay: hsla(var(--greyH), var(--greyS), var(--grey1L), 0.07);
+    --c-background: var(--c-grey8);
+    --c-body: var(--c-grey1);
+    --c-bodyDimmed: hsla(var(--greyH), var(--greyS), var(--grey1L), 0.5);
+    --c-fieldBorder: var(--c-grey6);
+    --c-buttonBg: var(--c-grey6);
 
 
     /* Layer */
@@ -86,22 +88,27 @@
 }
 
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
     
     body{
-        --c-border: hsla(var(--greyH), var(--greyS), var(--grey1L), 0.1);
-        --c-overlay: hsla(var(--greyH), var(--greyS), var(--grey1L), 0.07);
-        --c-background: var(--c-grey8);
-        --c-body: var(--c-grey1);
-        --c-bodyDimmed: hsla(var(--greyH), var(--greyS), var(--grey1L), 0.5);
-        --c-fieldBorder: var(--c-grey6);
-        --c-buttonBg: var(--c-grey6);
+        --c-border: hsla(var(--greyH), var(--greyS), var(--grey8L), 0.1);
+        --c-overlay: hsla(var(--greyH), var(--greyS), var(--grey8L), 0.07);
+        --c-background: white;
+        --c-body: var(--c-grey8);
+        --c-bodyDimmed: hsla(var(--greyH), var(--greyS), var(--grey8L), 0.5);
+        --c-fieldBorder: var(--c-grey2);
+        --c-buttonBg: var(--c-grey2);
     }
     
     img {
-        filter: brightness(.8) contrast(1.2);
+        filter: none;
     }
 }
+
+img {
+    filter: brightness(.8) contrast(1.2);
+}
+
 
 /* general */
 *{
