@@ -11,6 +11,7 @@
         font-family: Nunito, Roboto, system-ui, sans-serif;;
     }
     div {
+        text-align: center;
         height: 100vh;
         display: flex;
         align-items: center;
