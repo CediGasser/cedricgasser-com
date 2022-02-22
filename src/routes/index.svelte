@@ -6,6 +6,8 @@
 </div>
 
 <style>
+    /*design base: https://hihayk.github.io/shaper/#Nunito,%20sans-serif/1.4/1/2.98/0.8/2/0.5/314/100/46/5/0.5/2/false  */
+    
     @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
     * {
         font-family: Nunito, Roboto, system-ui, sans-serif;;
