@@ -8,7 +8,7 @@
     <h1>Welcome to my portfolio website</h1>
 </div>
 <div>
-    <h3>Yes, there is nothing here yet.</h3>
+    <h2>Yes, there is nothing here yet.</h2>
 </div>
 
 <style>
@@ -26,7 +26,7 @@
         justify-content: center;
         flex-direction: column;
     }
-    h3 {
+    h2 {
         margin-top: 100vh;
     }
 </style>
