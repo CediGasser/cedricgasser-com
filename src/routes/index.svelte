@@ -1,3 +1,9 @@
+<script lang="ts">
+    import Seo from '$lib/components/Seo.svelte'
+</script>
+
+<Seo title="Cedric Gasser" keywords="Webdev Svelte Portfolio" type="Portfolio" description="Portfolio Website" image="/social_preview.png"/>
+
 <div>
     <h1>Welcome to my portfolio website</h1>
 </div>
