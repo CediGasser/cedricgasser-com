@@ -28,5 +28,6 @@
     }
     h2 {
         margin-top: 100vh;
+        margin-bottom: 40vh;
     }
 </style>
