@@ -3,6 +3,10 @@
 </script>
 
 <Seo title="Cedric Gasser" keywords="Webdev Svelte Portfolio" type="Portfolio" description="My portfolio website. One of the most minimalisticly designed websites that exist, although hopefully there will be some more content in the future." image="/social_preview.png"/>
+<svelte:head>
+    <meta name="theme-color" content="#ff9d00">
+</svelte:head>
+
 
 <section>
     <h1 class="text-center">Welcome to my portfolio website</h1>
