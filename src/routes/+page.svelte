@@ -32,10 +32,10 @@
     :global(body, html) {
         scroll-snap-type: y mandatory;
     }
-    :global(body) > section:nth-child(even) {
+    section:nth-child(even) {
         background-color: #8d8d8d;
     }
-    :global(body) > section:nth-child(odd) {
+    section:nth-child(odd) {
         background-color: #ff9d00;
     }
     section {
