@@ -3,8 +3,9 @@
     export let description: string = undefined;
     export let keywords: string;
     export let canonical: string = undefined;
-    export let type: string;
-    export let image: string;
+    export let type: string = 'site';
+    export let image: string = '$lib/assets/fallback_image.webp';
+    export let themeColor: string = undefined;
 </script>
 
 <svelte:head>
@@ -26,7 +27,7 @@
     {#if canonical}
         <meta property="og:url" content={canonical} />
     {/if}
-    <meta property="og:type" content={type ? type : 'site'} />
+    <meta property="og:type" content={type} />
     <meta property="og:image" content={image} />
 
     <meta name="twitter:card" content="summary_large_image" />
@@ -35,4 +36,8 @@
         <meta name="twitter:description" content={description} />
     {/if}
     <meta name="twitter:image" content={image} />
+
+    {#if themeColor}
+        <meta name="theme-color" content={themeColor} />
+    {/if}
 </svelte:head>
