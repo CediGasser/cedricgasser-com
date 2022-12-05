@@ -111,3 +111,16 @@ body {
     background-color: var(--c-background);
     color: var(--c-body);
 }
+
+h1 {
+    font-size: var(--text-xl);
+    margin-block-start: var(--space-l)
+}
+
+h2 {
+    font-size: var(--text-l);
+}
+
+h3 {
+    font-size: var(--text-m);
+}

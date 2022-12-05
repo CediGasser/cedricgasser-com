@@ -23,11 +23,7 @@
 
 <style>
     section:nth-child(even) {
-        background-color: #8d8d8d;
-    }
-
-    section:nth-child(odd) {
-        background-color: #ff9d00;
+        background-color: var(--c-overlay);
     }
 
     section {
