@@ -2,6 +2,12 @@
     import '$lib/assets/reset.css';
     import '$lib/assets/global.css';
     import logo from '$lib/assets/logo.png'
+    import type { PageData } from './$types';
+    import PageTransition from '$lib/components/PageTransition.svelte';
+
+    export let data: PageData
+    let navDirection = 0;
+    const randDirection = () => Math.PI * Math.random() * 2;
 </script>
 
 <nav>
@@ -13,9 +19,11 @@
     </div>
 </nav>
 
+<PageTransition refresh={data.pathname} direction={navDirection} on:transitioned={() => navDirection = randDirection()}>
 <main>
     <slot />
 </main>
+</PageTransition>
 
 <footer>
     <p>© {new Date().getFullYear()} Cedric Gasser</p>
@@ -27,7 +35,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 1rem;
+        padding: var(--space-m);
         background-color: var(--c-overlay);
     }
     
@@ -37,7 +45,7 @@
         padding-block: var(--textFrameY);
         text-decoration: none;
         color: var(--c-text);
-        border-radius: 8px;
+        border-radius: var(--radius);
         transition: background-color 0.2s ease, box-shadow 0.2s ease;
     }
 
