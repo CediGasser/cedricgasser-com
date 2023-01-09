@@ -105,11 +105,17 @@
     font-family: var(--fontFamily);
     font-size: var(--text-s);
     line-height: var(--globalLineHeight);
+    color: var(--c-body);
 }
 
-body {
+html {
     background-color: var(--c-background);
     color: var(--c-body);
+}
+
+a {
+    color: var(--c-accent);
+    text-decoration: none;
 }
 
 h1 {

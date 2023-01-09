@@ -4,11 +4,18 @@
     import logo from '$lib/assets/logo.png'
     import type { PageData } from './$types';
     import PageTransition from '$lib/components/PageTransition.svelte';
+    import Background from '$lib/components/Background.svelte';
 
     export let data: PageData
     let navDirection = 0;
-    const randDirection = () => Math.PI * Math.random() * 2;
+    let background;
+
+    const onNav = () => {
+        navDirection = Math.PI * Math.random() * 2;
+        background.pulseDeterent();
+    }
 </script>
+
 
 <nav>
     <a href="/"><img src={logo} alt="Logo" height="32" width="32"/></a>
@@ -19,7 +26,9 @@
     </div>
 </nav>
 
-<PageTransition refresh={data.pathname} direction={navDirection} on:transitioned={() => navDirection = randDirection()}>
+<Background bind:this={background} />
+
+<PageTransition refresh={data.pathname} direction={navDirection} on:transitioned={onNav}>
 <main>
     <slot />
 </main>
@@ -61,6 +70,7 @@
         margin-inline: auto;
         max-width: 800px;
         min-height: calc(100vh - 3rem);
+        background-color: transparent;
     }
 
     .small {

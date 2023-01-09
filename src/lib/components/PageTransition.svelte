@@ -25,3 +25,9 @@
     <slot />
 </div>
 {/key}
+
+<style>
+    div {
+        background-color: transparent;
+    }
+</style>
