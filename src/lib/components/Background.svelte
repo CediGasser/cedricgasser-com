@@ -163,7 +163,7 @@
 <div class="outer-container">
   <div class="inner-container">
     {#each balls as ball}
-      <div class="metaball" style="--size: {ball.size}px; --color: {ball.color}; transform: translate({ball.x - ball.size/2}px, {ball.y - ball.size/2}px;"></div>
+      <div class="metaball" style="--size: {ball.size}px; --color: {ball.color}; transform: translate({ball.x - ball.size/2}px, {ball.y - ball.size/2}px);"></div>
     {/each}
   </div>
 </div>
