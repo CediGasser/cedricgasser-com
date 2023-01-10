@@ -130,3 +130,8 @@ h2 {
 h3 {
     font-size: var(--text-m);
 }
+
+.noise-background {
+    background: url($lib/assets/noise.svg);
+    backdrop-filter: blur(10px);
+}

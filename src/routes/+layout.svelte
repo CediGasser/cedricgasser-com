@@ -5,28 +5,26 @@
     import type { PageData } from './$types';
     import PageTransition from '$lib/components/PageTransition.svelte';
     import Background from '$lib/components/Background.svelte';
+    import { page } from '$app/stores';
 
     export let data: PageData
     let navDirection = 0;
-    let background;
 
     const onNav = () => {
         navDirection = Math.PI * Math.random() * 2;
-        background.pulseDeterent();
     }
 </script>
 
 
-<nav>
+<nav class="noise-background">
     <a href="/"><img src={logo} alt="Logo" height="32" width="32"/></a>
     <div class="navLinks">
-        <a href="/">Home</a>
         <a href="/contact">Contact</a>
         <a href="/blog">Blog</a>
     </div>
 </nav>
 
-<Background bind:this={background} />
+<Background refresh={$page.url.pathname} />
 
 <PageTransition refresh={data.pathname} direction={navDirection} on:transitioned={onNav}>
 <main>
@@ -34,7 +32,7 @@
 </main>
 </PageTransition>
 
-<footer>
+<footer class="noise-background">
     <p>© {new Date().getFullYear()} Cedric Gasser</p>
     <pre class="small">Made with {'<'}3 and Svelte</pre>
 </footer>
@@ -45,7 +43,11 @@
         justify-content: space-between;
         align-items: center;
         padding: var(--space-m);
-        background-color: var(--c-overlay);
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1;
     }
     
     .navLinks > a {
@@ -68,6 +70,7 @@
 
     main {
         margin-inline: auto;
+        margin-top: 6rem;
         max-width: 800px;
         min-height: calc(100vh - 3rem);
         background-color: transparent;
@@ -83,6 +86,5 @@
         flex-direction: column;
         align-items: center;
         padding: 1rem;
-        background-color: var(--c-overlay);
     }
 </style>

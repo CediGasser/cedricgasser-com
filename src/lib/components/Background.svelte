@@ -2,6 +2,7 @@
   import { onMount } from "svelte"
 
   export let ballCount: number = 8
+  export let refresh: string
 
   let frame: number
   let balls: Array<{ x: number, y: number, vx: number, vy: number, size: number, color: string, charge: number }> = []
@@ -12,7 +13,9 @@
   const MIN_BLOB_SIZE = 150
   const MAX_BLOB_SIZE = 250
   const RANDOM_MOVEMENT = 80
-  const DETERENT_CHARGE = -500
+  const DETERENT_CHARGE = -1000
+
+  $: (refresh) && pulseDeterent()
 
   export function pulseDeterent() {
     const { totalX, totalY } = balls.reduce((acc, ball) => {
