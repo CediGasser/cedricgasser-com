@@ -1,3 +1,7 @@
+<script lang="ts">
+  
+</script>
+
 <h1>Enjoy my posts</h1>
 <ul>
   <li><a href="/blog/metaballs">Metaballs</a></li>
