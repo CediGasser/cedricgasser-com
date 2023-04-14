@@ -2,12 +2,11 @@
     import '$lib/assets/reset.css';
     import '$lib/assets/global.css';
     import logo from '$lib/assets/logo.png'
-    import type { PageData } from './$types';
     import PageTransition from '$lib/components/PageTransition.svelte';
     import Background from '$lib/components/Background.svelte';
     import { page } from '$app/stores';
 
-    export let data: PageData
+    export let data
     let navDirection = 0;
 
     const onNav = () => {
