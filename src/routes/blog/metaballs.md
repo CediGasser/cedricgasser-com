@@ -1,6 +1,7 @@
 ---
 title: Metaballs
 date: "2023-02-15"
+publish: false
 ---
 
 ## Introduction
@@ -11,4 +12,4 @@ shapes.
 
 ## 
 
-### THis is a quote or so...
+### This is a quote or so...
