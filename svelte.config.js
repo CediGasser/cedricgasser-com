@@ -20,7 +20,10 @@ const config = {
 			pages: 'build',
 			assets: 'build',
 			fallback: null
-		})
+		}),
+		prerender: {
+			entries: ['/blog/metaballs']
+		},
 	}
 };
 
