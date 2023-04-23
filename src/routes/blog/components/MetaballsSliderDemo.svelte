@@ -75,15 +75,6 @@
 </div>
 
 <style>
-  article {
-    max-width: 600px;
-    margin: 0 auto;
-  }
-
-  h1 {
-    margin-bottom: 0;
-  }
-
   p {
     margin-top: 0;
     color: #999;

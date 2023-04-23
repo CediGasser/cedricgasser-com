@@ -16,9 +16,9 @@ Simply put, we try to create that circle morphing effect you see here:
 ## Setup
 The code snippets that I'll show you will be written in JavaScript. I just included the important bits so you can understand the idea and implement something similar yourself. But be creative and give it you own twist!
 
-Usualy, when working with an animated canvas, I structure my code to have an `update()` and a `js draw()` function. These will then be called from a loop or something like the `js requestAnimationFrame(cb)` callback.
+Usualy, when working with an animated canvas, I structure my code to have an `update()` and a `draw()` function. These will then be called from a loop or something like the `requestAnimationFrame(cb)` callback.
 
-```js
+```ts
 let frame: number;
 
 function animate() {
