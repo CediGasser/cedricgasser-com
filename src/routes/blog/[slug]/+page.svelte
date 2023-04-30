@@ -1,5 +1,6 @@
 <script>
   import '$lib/assets/prism-theme.css'
+  import { formatDate } from '$lib/utils'
 
   export let data;
   const { title, date, Content } = data;
@@ -11,7 +12,7 @@
 
 <article>
   <h1>{title}</h1>
-  <p>Published: {date}</p>
+  <p>{formatDate(date)}</p>
   <Content />
 </article>
 

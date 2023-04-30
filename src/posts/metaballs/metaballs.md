@@ -1,14 +1,14 @@
 ---
 title: Metaballs
-description: How to create blob like graphics preceduraly
+description: How to create blob like graphics proceduraly
 date: "2023-02-15"
-publish: false
 tags:
  - Creative Coding
  - Interactive
+publish: false
 ---
 <script>
-  import MetaballsSliderDemo from './components/MetaballsSliderDemo.svelte'
+  import MetaballsSliderDemo from './SliderDemo.svelte'
 </script>
 
 ## Introduction

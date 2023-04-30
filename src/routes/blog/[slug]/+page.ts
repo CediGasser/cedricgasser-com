@@ -1,11 +1,12 @@
+import type { Post } from '$lib/types.js';
+
 export const load = async ({ params }) => {
-  const post = await import(`../${params.slug}.md`)
-  const { title, date } = post.metadata
+  const post = await import(`/src/posts/${params.slug}/${params.slug}.md`)
+  const metadata: Omit<Post, 'slug'> = post.metadata
   const Content = post.default
 
   return {
     Content,
-    title,
-    date,
+    ...metadata
   }
 };

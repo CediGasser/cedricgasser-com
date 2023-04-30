@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { formatDate } from "$lib/utils"
+
   export let data;
 </script>
 
@@ -8,10 +10,9 @@
     <a href="/blog/{post.slug}">
       <h2>{post.title}</h2>
     </a>
-    <p>Published: {post.date}</p>
+    <p>{formatDate(post.date)}</p>
+    <p>{post.description}</p>
   {:else}
     <p>No posts yet</p>
   {/each}
 </ul>
-
-<p>Blog idea from <a href="https://joshcollinsworth.com/blog/build-static-sveltekit-markdown-blog">joshcollinsworth.com</a></p>
