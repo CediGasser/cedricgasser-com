@@ -1,7 +1,11 @@
 ---
 title: Metaballs
+description: How to create blob like graphics preceduraly
 date: "2023-02-15"
 publish: false
+tags:
+ - Creative Coding
+ - Interactive
 ---
 <script>
   import MetaballsSliderDemo from './components/MetaballsSliderDemo.svelte'
@@ -31,3 +35,34 @@ animate()
 
 stopBtn.click = () => cancelAnimationFrame(frame);
 ```
+
+We'll also define an array with some blobs. The points each have a velocity and a position in both x and y axis. I'll also add a radius r for later.
+
+```ts
+let blobs = [
+  { x: 30, y: 50, r: 5 },
+  { x: 60, y: 40, r: 10 },
+  { x: 120, y: 20, r: 15 },
+  { x: 30, y: 100, r: 5 },
+  { x: 100, y: 100, r: 8 },
+]
+```
+
+The `update()` function alters the state of whatever you're trying to show each iteration. In our case this can be in many different ways: it could move the blobs as if they gravitate to each other like in some sort of gravity system or they could just move randomly.
+
+The interesting part regarding metaballs happens in the `draw()` function. There, a value for every pixel is calculated which decides how that pixel appears.
+
+## Update
+For simplicity's sake, we'll just move some points randomly on the canvas. We'll later make some improvements to make it look more interesting.
+
+```ts
+function update() {
+  blobs.forEach((blob) => {
+    blob.x += Math.random() * 2 - 1
+    blob.y += Math.random() * 2 - 1
+  })
+}
+```
+
+## Draw
+This is where the complexity begins. We want to calculate every pixels distance to every blob and then get a value out of it with a  falloff function. Comparing this value with a threshold then tells us if we want to draw that pixel solid or not.
