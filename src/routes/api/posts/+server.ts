@@ -1,17 +1,21 @@
 import { json } from "@sveltejs/kit"
 import type { Post } from "$lib/types"
 
-type ImportPostFiles = Record<string, { default: {}, metadata: Omit<Post, 'slug'>}>
+type GlobEntry = { 
+  default: unknown, 
+  metadata: Omit<Post, 'slug'>
+}
 
 const getPosts = async () => {
-  const files: ImportPostFiles = import.meta.glob('/src/posts/*/*.md', { eager: true })
+  const files = import.meta.glob<GlobEntry>('/src/posts/*/*.md', { eager: true })
   let posts: Post[] = []
 
   Object.entries(files).map(async ([path, file]) => {
     const slug = path.split('/').slice(-1)[0].slice(0, -3) // example: 'src/routes/blog/article.md' -> 'article'
     let post: Post = {
       ...file.metadata,
-      slug: slug}
+      slug: slug
+    }
 
     if (post.publish) {
       posts.push(post)

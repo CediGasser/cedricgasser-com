@@ -1,6 +1,9 @@
 import preprocess from 'svelte-preprocess';
-import adapter from '@sveltejs/adapter-static';
+import adapter from '@sveltejs/adapter-node';
 import { mdsvex } from 'mdsvex';
+import fs from 'fs';
+
+const postPaths = fs.readdirSync('./src/posts').map((path) => `/blog/${path}`);
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -16,13 +19,9 @@ const config = {
 	extensions: ['.svelte', '.md'],
 
 	kit: {
-		adapter: adapter({
-			pages: 'build',
-			assets: 'build',
-			fallback: null
-		}),
+		adapter: adapter(),
 		prerender: {
-			entries: ['/blog/metaballs']
+			entries: postPaths,
 		},
 	}
 };

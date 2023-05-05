@@ -9,7 +9,7 @@
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
   },
   "devDependencies": {
-    "@sveltejs/adapter-static": "next",
+    "@sveltejs/adapter-node": "^1.2.4",
     "@sveltejs/kit": "^1.15.5",
     "mdsvex": "^0.10.6",
     "svelte": "^3.44.0",
