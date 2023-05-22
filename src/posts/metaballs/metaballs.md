@@ -8,14 +8,14 @@ tags:
 publish: false
 ---
 <script>
-  import MetaballsSliderDemo from './SliderDemo.svelte'
+  import SliderDemo from './SliderDemo.svelte'
 </script>
 
 ## Introduction
 Metaballs are a way to create smooth, organic shapes that look like "blobs". 
 
 Simply put, we try to create that circle morphing effect you see here:
-<MetaballsSliderDemo sliderPosition={34} />
+<SliderDemo sliderPosition={34} />
 
 ## Setup
 The code snippets that I'll show you will be written in JavaScript. I just included the important bits so you can understand the idea and implement something similar yourself. But be creative and give it you own twist!
