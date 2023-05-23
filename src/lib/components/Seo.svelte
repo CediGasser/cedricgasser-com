@@ -3,7 +3,7 @@
     export let description: string = undefined;
     export let keywords: string;
     export let canonical: string = undefined;
-    export let type: string = 'site';
+    export let type: 'website' | 'article' | 'site' | 'book' | 'profile' = 'site';
     export let image: string = '$lib/assets/fallback_image.webp';
     export let themeColor: string = undefined;
 </script>
@@ -18,7 +18,10 @@
     {#if canonical}
         <link rel="canonial" href={canonical} />
     {/if}
-    <meta name="keywords" content={keywords} />
+
+    {#if keywords}
+        <meta name="keywords" content={keywords} />
+    {/if}
 
     <meta property="og:title" content={title} />
     {#if description}
@@ -27,6 +30,7 @@
     {#if canonical}
         <meta property="og:url" content={canonical} />
     {/if}
+
     <meta property="og:type" content={type} />
     <meta property="og:image" content={image} />
 
