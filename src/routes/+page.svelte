@@ -1,39 +1,31 @@
 <script lang="ts">
-    import Seo from '$lib/components/Seo.svelte'
-    import socialPreview from '$lib/assets/social_preview.png'
+  import Seo from '$lib/components/Seo.svelte'
+  import socialPreview from '$lib/assets/social_preview.png'
 </script>
 
-<Seo 
-    title="Cedric Gasser" 
-    keywords="Webdev Svelte Portfolio" 
-    type="Portfolio" 
-    description="My portfolio website. One of the most minimalisticly designed websites that exist, although hopefully there will be some more content in the future." 
-    image={socialPreview}
-    themeColor="#ff9d00"/>
+<Seo
+  title="Cedric Gasser"
+  keywords="Webdev Svelte Portfolio"
+  type="site"
+  description="My simple site."
+  image={socialPreview}
+  themeColor="#ff9d00"
+/>
 
 <section>
-    <h1 class="text-center">Welcome to my portfolio website</h1>
-</section>
-<section>
-    <h2 class="text-center">One of the most minimalistic designed websites out there.</h2>
-</section>
-<section>
-    <h2 class="text-center">Yes, there is nothing here yet.</h2>
+  <h1 class="text-center">Cedric Gasser</h1>
 </section>
 
 <style>
-    section:nth-child(even) {
-        background-color: var(--c-overlay);
-    }
+  section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 600px;
+    height: 100vh;
+  }
 
-    section {
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        height: 100vh;
-    }
-    
-    .text-center {
-        text-align: center;
-    }
+  h1 {
+    font-size: 3rem;
+  }
 </style>
