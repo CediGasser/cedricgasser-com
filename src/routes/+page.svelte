@@ -12,17 +12,23 @@
   themeColor="#ff9d00"
 />
 
-<section>
-  <h1 class="text-center">Cedric Gasser</h1>
-</section>
+<main>
+  <section>
+    <h1>CEDRIC GASSER</h1>
+  </section>
+</main>
 
 <style>
-  section {
+  main {
     display: flex;
     justify-content: center;
     align-items: center;
     max-width: 600px;
     height: 100vh;
+  }
+
+  section {
+    padding: 1rem;
   }
 
   h1 {
