@@ -158,11 +158,13 @@
 
     const cellValue = grid[y][x] as number
 
-    const colour = cellValue ? `hsl(${cellValue * 360},100%,50%)` : 'white'
-
-    ctx.fillStyle = colour
-
-    ctx.fillRect(x * cellSize, y * cellSize, cellSize, cellSize)
+    if (cellValue > 0) {
+      const colour = `hsl(${cellValue * 360},100%,50%)`
+      ctx.fillStyle = colour
+      ctx.fillRect(x * cellSize, y * cellSize, cellSize, cellSize)
+    } else {
+      ctx.clearRect(x * cellSize, y * cellSize, cellSize, cellSize)
+    }
   }
 
   const paint = (mouseX: number, mouseY: number) => {
