@@ -85,7 +85,8 @@
 
   const update = (t: number) => {
     // Calculate time since last frame
-    let tDelta = t - tPrevious
+    // cap at some delta so unexpected long frames don't mess up the simulation
+    let tDelta = Math.min(t - tPrevious, 200)
 
     // Update the velocities of the balls based on the forces between them
     for (let i = 0; i < balls.length; i++) {
