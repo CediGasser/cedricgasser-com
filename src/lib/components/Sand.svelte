@@ -169,7 +169,6 @@
 
   const paint = (mouseX: number, mouseY: number) => {
     const cellX = Math.floor(mouseX / cellSize)
-
     const cellY = Math.floor(mouseY / cellSize)
 
     const newCells = []
@@ -177,6 +176,7 @@
     for (let tmpY = cellY - BRUSH_SIZE; tmpY <= cellY + BRUSH_SIZE; tmpY++) {
       for (let tmpX = cellX - BRUSH_SIZE; tmpX <= cellX + BRUSH_SIZE; tmpX++) {
         if (!isValidCell(tmpX, tmpY)) continue
+        if (grid[tmpY][tmpX] !== EMPTY) continue
 
         newCells.push({
           x: tmpX,
