@@ -1,20 +1,31 @@
 <script lang="ts">
-  import Seo from '$lib/components/Seo.svelte'
-  import socialPreview from '$lib/assets/social_preview.png'
-</script>
+  import { page } from '$app/stores'
 
-<Seo
-  title="Cedric Gasser"
-  keywords="Webdev Svelte Portfolio"
-  type="site"
-  description="My simple site."
-  image={socialPreview}
-  themeColor="#ff9d00"
-/>
+  import BlurryBalls from '$lib/components/BlurryBalls.svelte'
+  import Sand from '$lib/components/Sand.svelte'
+  
+  const components = {
+    balls: BlurryBalls,
+    sand: Sand,
+  } as const
+
+  type BackgroundVariant = keyof typeof components
+
+  let background: BackgroundVariant = $derived.by(() => {
+    const param = $page.url.searchParams.get('pls')
+    const keys = Object.keys(components)
+
+    if (param && keys.includes(param)) return param as BackgroundVariant
+    return keys[keys.length * Math.random() | 0] as BackgroundVariant
+  })
+</script>
 
 <main>
   <section>
     <h1>CEDRIC GASSER</h1>
+  </section>
+  <section>
+      <svelte:component this={components[background]} />
   </section>
 </main>
 
@@ -23,12 +34,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    max-width: 600px;
-    height: 100vh;
+    height: 100dvh;
   }
 
   section {
-    padding: 1rem;
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   h1 {

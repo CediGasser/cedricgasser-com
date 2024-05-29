@@ -1,9 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte'
 
-  const ballCount: number = 8
-
-  let frame: number
+  let frame = $state(0)
   let balls: Array<{
     x: number
     y: number
@@ -13,14 +11,20 @@
     color: string
     charge: number
   }> = $state([])
-  const FORCE_COEFICIENT = 6
-  const MAX_VELOCITY = 20
+
+  const FORCE_COEFICIENT = 100
+  const MAX_VELOCITY = 70
   const PUSH_BACK = 1
   const STEPS = 0.001
-  const MIN_BLOB_SIZE = 150
-  const MAX_BLOB_SIZE = 250
-  const RANDOM_MOVEMENT = 80
-  const DETERENT_CHARGE = -1000
+  const MIN_BALL_SIZE = 200
+  const MAX_BALL_SIZE = 300
+  const RANDOM_MOVEMENT = 10
+  const DETERENT_CHARGE = -50
+  const BORDER_AREA = 0.1
+  const BALL_COUNT = 6
+
+  let width = $state(0)
+  let height = $state(0)
 
   const getBallsCenter = () => {
     const { totalX, totalY } = balls.reduce(
@@ -58,25 +62,22 @@
     }, 10)
 
     setTimeout(() => {
-      balls = balls.filter((b) => b !== deterent)
+      balls = balls.filter((ball) => ball.charge >= 0)
       clearInterval(interval)
     }, 250)
   }
 
   const setup = () => {
-    const darkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
-
-    balls = Array(ballCount)
+    balls = Array(BALL_COUNT)
       .fill(0)
       .map(() => ({
-        x: Math.random() * window.innerWidth,
-        y: Math.random() * window.innerHeight,
+        x: width * BORDER_AREA + Math.random() * width * (1 - 2 * BORDER_AREA),
+        y:
+          height * BORDER_AREA + Math.random() * height * (1 - 2 * BORDER_AREA),
         vx: Math.random() * 10 - 5,
         vy: Math.random() * 10 - 5,
-        size: Math.random() * MIN_BLOB_SIZE + MAX_BLOB_SIZE - MIN_BLOB_SIZE,
-        color: darkTheme
-          ? `rgb(${Math.random() * 200 + 55}, 0, ${Math.random() * 200 + 55})`
-          : `rgb(${Math.random() * 128 + 127}, 0, ${Math.random() * 128 + 127})`,
+        size: Math.random() * MIN_BALL_SIZE + MAX_BALL_SIZE - MIN_BALL_SIZE,
+        color: ['red', 'blue'][Math.round(Math.random())],
         charge: 1,
       }))
   }
@@ -127,35 +128,37 @@
       ball.y += ball.vy * tDelta * STEPS
 
       // Bounce the balls off the walls and slow them down
-      if (ball.x < 0 || ball.x > window.innerWidth) {
-        ball.vx = -ball.vx * 0.9
+      if (ball.x < 0) {
+        ball.vx = Math.abs(ball.vx)
+      } else if (ball.x > width) {
+        ball.vx = Math.abs(ball.vx) * -1
       }
-      if (ball.y < 0 || ball.y > window.innerHeight) {
+      if (ball.y < 0) {
         ball.vy = -ball.vy * 0.9
+      } else if (ball.y > height) {
+        ball.vy = Math.abs(ball.vy) * -1
       }
 
       // Slow the balls down at border areas
-      if (ball.x < window.innerHeight * 0.3) {
+      if (ball.x < height * BORDER_AREA) {
         ball.vx += PUSH_BACK
       }
-      if (ball.x > window.innerWidth * 0.7) {
+      if (ball.x > width * (1 - BORDER_AREA)) {
         ball.vx -= PUSH_BACK
       }
-      if (ball.y < window.innerWidth * 0.3) {
+      if (ball.y < width * BORDER_AREA) {
         ball.vy += PUSH_BACK
       }
-      if (ball.y > window.innerHeight * 0.7) {
+      if (ball.y > height * (1 - BORDER_AREA)) {
         ball.vy -= PUSH_BACK
       }
 
       // Randomly alter the ball's trajectory
       if (Math.random() < 0.1) {
-        ball.vx += Math.random() * RANDOM_MOVEMENT - RANDOM_MOVEMENT / 2
-        ball.vy += Math.random() * RANDOM_MOVEMENT - RANDOM_MOVEMENT / 2
+        ball.vx += (Math.random() * 2 - 1) * RANDOM_MOVEMENT
+        ball.vy += (Math.random() * 2 - 1) * RANDOM_MOVEMENT
       }
     }
-
-    balls = balls
     tPrevious = t
   }
 
@@ -173,7 +176,13 @@
   })
 </script>
 
-<div class="outer-container">
+<svelte:document on:click={pulseDeterent} />
+
+<div
+  class="outer-container"
+  bind:clientWidth={width}
+  bind:clientHeight={height}
+>
   <div class="inner-container">
     {#each balls as ball}
       <div
@@ -187,21 +196,16 @@
 
 <style>
   .outer-container {
-    filter: contrast(3) blur(15px);
+    filter: contrast(10) blur(10px) contrast(5);
     width: 100%;
     height: 100%;
-    top: 0;
-    left: 0;
-    position: fixed;
-    z-index: -1;
+    background-color: var(--color-background);
   }
 
   .inner-container {
-    filter: blur(20px);
+    filter: blur(5px);
     width: 100%;
     height: 100%;
-    top: 0;
-    left: 0;
   }
 
   .metaball {
@@ -212,5 +216,6 @@
     background: radial-gradient(farthest-side, var(--color), transparent);
     top: 0;
     left: 0;
+    mix-blend-mode: color-dodge;
   }
 </style>
