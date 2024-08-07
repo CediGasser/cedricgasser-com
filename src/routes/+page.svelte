@@ -1,5 +1,6 @@
 <script lang="ts">
   import { page } from '$app/stores'
+  import { Mail, Github } from '$lib/components/icons'
 
   import BlurryBalls from '$lib/components/BlurryBalls.svelte'
   import Sand from '$lib/components/Sand.svelte'
@@ -22,7 +23,13 @@
 
 <main>
   <section>
-    <h1>CEDRIC GASSER</h1>
+    <div>
+      <h1>CEDRIC GASSER</h1>
+      <div class="icon-links">
+        <Mail href="mailto:mail@cedricgasser.com" />
+        <Github href="https://github.com/CediGasser" />
+      </div>
+    </div>
   </section>
   <section>
     <svelte:component this={components[background]} />
@@ -45,9 +52,28 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
+  }
+
+  .icon-links {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    justify-content: end;
+    width: 100%;
   }
 
   h1 {
     font-size: 3rem;
+    background: linear-gradient(
+      90deg,
+      rgb(129, 3, 232) 0%,
+      rgb(198, 0, 145) 50%,
+      rgb(231, 0, 77) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
   }
 </style>
