@@ -17,12 +17,12 @@
   const BRUSH_SIZE = 4
   const DRAW_INTERVAL = 20
 
-  let screenHeight: number = $state(0)
-  let screenWidth: number = $state(0)
+  let height: number = $state(400)
+  let width: number = $state(400)
 
   const cellSize = 5
-  const gridHeight = $derived(Math.ceil(screenHeight / cellSize))
-  const gridWidth = $derived(Math.ceil(screenWidth / cellSize))
+  const gridHeight = $derived(Math.ceil(height / cellSize))
+  const gridWidth = $derived(Math.ceil(width / cellSize))
 
   let cellsToUpdate: Cell[] = []
   let cellsToRerender: Cell[] = []
@@ -141,12 +141,8 @@
     renderCount = cellsToRerender.length
 
     for (const { x, y } of cellsToRerender) {
-      // buffer[i++] = grid[y][x] === 0 ? 0xffffffff : 0xff000000;
-
       drawCell(ctx, x, y)
     }
-
-    // ctx.putImageData(data, 0, 0);
 
     update(t)
 
@@ -199,9 +195,10 @@
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
-    canvas.width = screenWidth
-
-    canvas.height = screenHeight
+    canvas.width = canvas.offsetWidth
+    canvas.height = canvas.offsetHeight
+    width = canvas.width
+    height = canvas.height
 
     requestAnimationFrame((t) => draw(ctx, t))
   }
@@ -211,15 +208,18 @@
   const mousePosition: { x: number; y: number } = $state({ x: 0, y: 0 })
 
   const onMousemove = (e: MouseEvent) => {
-    mousePosition.x = e.clientX
-    mousePosition.y = e.clientY
+    const { top, left } = (e.target as HTMLElement).getBoundingClientRect()
+    mousePosition.x = e.clientX - left
+    mousePosition.y = e.clientY - top
   }
 
   const onMousedown = () => {
+    console.log('mousedown')
     clearInterval(intervalId)
 
     intervalId = setInterval(() => {
       paint(mousePosition.x, mousePosition.y)
+      console.log('painting')
     }, DRAW_INTERVAL)
   }
 
@@ -228,12 +228,16 @@
   }
 </script>
 
-<svelte:window
-  bind:innerWidth={screenWidth}
-  bind:innerHeight={screenHeight}
-  on:mousemove={onMousemove}
-  on:mousedown={onMousedown}
-  on:mouseup={onMouseup}
-/>
+<canvas
+  onmousemove={onMousemove}
+  onmousedown={onMousedown}
+  onmouseup={onMouseup}
+  use:simAction
+></canvas>
 
-<canvas width={screenWidth} height={screenHeight} use:simAction></canvas>
+<style>
+  canvas {
+    height: 100%;
+    width: 100%;
+  }
+</style>

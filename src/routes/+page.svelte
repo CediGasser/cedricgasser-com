@@ -3,7 +3,7 @@
 
   import BlurryBalls from '$lib/components/BlurryBalls.svelte'
   import Sand from '$lib/components/Sand.svelte'
-  
+
   const components = {
     balls: BlurryBalls,
     sand: Sand,
@@ -16,7 +16,7 @@
     const keys = Object.keys(components)
 
     if (param && keys.includes(param)) return param as BackgroundVariant
-    return keys[keys.length * Math.random() | 0] as BackgroundVariant
+    return keys[(keys.length * Math.random()) | 0] as BackgroundVariant
   })
 </script>
 
@@ -25,7 +25,7 @@
     <h1>CEDRIC GASSER</h1>
   </section>
   <section>
-      <svelte:component this={components[background]} />
+    <svelte:component this={components[background]} />
   </section>
 </main>
 
@@ -35,6 +35,7 @@
     justify-content: center;
     align-items: center;
     height: 100dvh;
+    background: radial-gradient(circle at 75%, #161616, #000000 50%);
   }
 
   section {

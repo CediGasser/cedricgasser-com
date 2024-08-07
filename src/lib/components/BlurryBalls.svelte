@@ -42,8 +42,12 @@
     }
   }
 
-  export const pulseDeterent = () => {
-    const { x, y } = getBallsCenter()
+  export const pulseDeterent = (x?: number, y?: number) => {
+    if (x === undefined || y === undefined) {
+      const coords = getBallsCenter()
+      x = coords.x
+      y = coords.y
+    }
 
     let deterent = {
       x,
@@ -70,14 +74,14 @@
   const setup = () => {
     balls = Array(BALL_COUNT)
       .fill(0)
-      .map(() => ({
+      .map((_, i) => ({
         x: width * BORDER_AREA + Math.random() * width * (1 - 2 * BORDER_AREA),
         y:
           height * BORDER_AREA + Math.random() * height * (1 - 2 * BORDER_AREA),
         vx: Math.random() * 10 - 5,
         vy: Math.random() * 10 - 5,
         size: Math.random() * MIN_BALL_SIZE + MAX_BALL_SIZE - MIN_BALL_SIZE,
-        color: ['red', 'blue'][Math.round(Math.random())],
+        color: ['red', 'blue'][i % 2],
         charge: 1,
       }))
   }
@@ -176,12 +180,13 @@
   })
 </script>
 
-<svelte:document on:click={pulseDeterent} />
-
+<!-- svelte-ignore a11y_click_events_have_key_events -->
+<!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
   class="outer-container"
   bind:clientWidth={width}
   bind:clientHeight={height}
+  onclick={(e) => pulseDeterent(e.layerX, e.layerY)}
 >
   <div class="inner-container">
     {#each balls as ball}
@@ -196,7 +201,7 @@
 
 <style>
   .outer-container {
-    filter: contrast(10) blur(10px) contrast(5);
+    filter: contrast(10) blur(20px) contrast(30);
     width: 100%;
     height: 100%;
     background-color: var(--color-background);
