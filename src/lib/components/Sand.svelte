@@ -203,7 +203,7 @@
     requestAnimationFrame((t) => draw(ctx, t))
   }
 
-  let intervalId: number | undefined = $state()
+  let intervalId: number | null = $state(null)
 
   const mousePosition: { x: number; y: number } = $state({ x: 0, y: 0 })
 
@@ -213,25 +213,46 @@
     mousePosition.y = e.clientY - top
   }
 
-  const onMousedown = () => {
-    console.log('mousedown')
-    clearInterval(intervalId)
-
-    intervalId = setInterval(() => {
-      paint(mousePosition.x, mousePosition.y)
-      console.log('painting')
-    }, DRAW_INTERVAL)
+  const onTouchmove = (e: TouchEvent) => {
+    const { top, left } = (e.target as HTMLElement).getBoundingClientRect()
+    mousePosition.x = e.touches[0].clientX - left
+    mousePosition.y = e.touches[0].clientY - top
   }
 
-  const onMouseup = () => {
-    clearInterval(intervalId)
+  const startDrawing = (e: TouchEvent | MouseEvent) => {
+    const { top, left } = (e.target as HTMLElement).getBoundingClientRect()
+    if (e instanceof MouseEvent) {
+      mousePosition.x = e.clientX - left
+      mousePosition.y = e.clientY - top
+    } else {
+      mousePosition.x = e.touches[0].clientX - left
+      mousePosition.y = e.touches[0].clientY - top
+    }
+
+    if (!intervalId) {
+      intervalId = setInterval(() => {
+        paint(mousePosition.x, mousePosition.y)
+      }, DRAW_INTERVAL)
+    }
+  }
+
+  const stopDrawing = () => {
+    if (intervalId) {
+      clearInterval(intervalId)
+      intervalId = null
+    }
   }
 </script>
 
 <canvas
   onmousemove={onMousemove}
-  onmousedown={onMousedown}
-  onmouseup={onMouseup}
+  onmousedown={startDrawing}
+  onmouseup={stopDrawing}
+  onmouseleave={stopDrawing}
+  ontouchmove={onTouchmove}
+  ontouchstart={startDrawing}
+  ontouchend={stopDrawing}
+  ontouchcancel={stopDrawing}
   use:simAction
 ></canvas>
 

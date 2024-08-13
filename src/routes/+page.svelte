@@ -76,4 +76,15 @@
     -webkit-text-fill-color: transparent;
     color: transparent;
   }
+
+  @media (max-width: 768px) {
+    main {
+      flex-direction: column;
+      background: radial-gradient(circle at 50% 75%, #161616, #000000 50%);
+    }
+
+    h1 {
+      font-size: 2rem;
+    }
+  }
 </style>
