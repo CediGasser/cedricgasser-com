@@ -1,6 +1,7 @@
 <script lang="ts">
   import { page } from '$app/stores'
   import { Mail, Github } from '$lib/components/icons'
+  import { browser } from '$app/environment'
 
   import BlurryBalls from '$lib/components/BlurryBalls.svelte'
   import Sand from '$lib/components/Sand.svelte'
@@ -13,7 +14,7 @@
   type BackgroundVariant = keyof typeof components
 
   let background: BackgroundVariant = $derived.by(() => {
-    const param = $page.url.searchParams.get('pls')
+    const param = browser ? $page.url.searchParams.get('pls') : null
     const keys = Object.keys(components)
 
     if (param && keys.includes(param)) return param as BackgroundVariant
