@@ -1,6 +1,6 @@
 <script lang="ts">
   import { page } from '$app/stores'
-  import { Mail, Github } from '$lib/components/icons'
+  import { Github } from '$lib/components/icons'
   import { browser } from '$app/environment'
 
   import BlurryBalls from '$lib/components/BlurryBalls.svelte'
@@ -27,7 +27,6 @@
     <div>
       <h1>CEDRIC GASSER</h1>
       <div class="icon-links">
-        <Mail href="mailto:mail@cedricgasser.com" />
         <Github href="https://github.com/CediGasser" />
       </div>
     </div>
